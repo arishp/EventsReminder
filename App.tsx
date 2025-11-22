@@ -22,12 +22,7 @@ function App() {
 
   useEffect(() => {
     setEvents(mockEvents);
-    console.log('component rendered');
   }, []);
-
-  useEffect(() => {
-    console.log('events updated', events);
-  }, [events]);
 
   return (
     <SafeAreaProvider>
