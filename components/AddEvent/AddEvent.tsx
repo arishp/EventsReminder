@@ -28,24 +28,28 @@ const AddEvent = ({ setEvents }: AddEventProps) => {
     return (
         <View style={[{ flexDirection: 'row' }]}>
             <TextInput
-                placeholder="Category"
-                style={{ borderWidth: 1, borderColor: 'black', margin: 5 }}
-                value={category}
-                onChangeText={setCategory}
-            />
-            <TextInput
                 placeholder="Date"
-                style={{ borderWidth: 1, borderColor: 'black', margin: 5 }}
+                style={{ borderWidth: 1, borderColor: 'black', margin: 5, borderRadius: 5, width: '10%', height: 40 }}
                 value={date}
                 onChangeText={setDate}
             />
             <TextInput
                 placeholder="Description"
-                style={{ borderWidth: 1, borderColor: 'black', margin: 5 }}
+                style={{ borderWidth: 1, borderColor: 'black', margin: 5, borderRadius: 5, width: '50%', height: 40 }}
                 value={description}
                 onChangeText={setDescription}
             />
-            <Button title="Add" onPress={handleAddClick}></Button>
+            <TextInput
+                placeholder="Category"
+                style={{ borderWidth: 1, borderColor: 'black', margin: 5, borderRadius: 5, width: '20%', height: 40 }}
+                value={category}
+                onChangeText={setCategory}
+            />
+
+            <Button
+                title="add"
+                onPress={handleAddClick}
+            />
         </View>
     );
 }

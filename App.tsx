@@ -18,7 +18,6 @@ import { mockEvents } from './data/mocks/events';
 
 function App() {
 
-
   const [events, setEvents] = useState<EventEntry[]>([]);
 
   useEffect(() => {
@@ -31,7 +30,6 @@ function App() {
     console.log('Top clicked')
     scrollViewRef.current?.scrollTo({ x: 0, y: 0, animated: true })
   }
-
 
   return (
     <SafeAreaProvider>
