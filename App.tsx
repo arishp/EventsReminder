@@ -5,41 +5,41 @@
  * @format
  */
 
-import { NewAppScreen } from '@react-native/new-app-screen';
-import { StatusBar, StyleSheet, useColorScheme, View } from 'react-native';
+import { useState, useEffect } from 'react';
+import { Text } from 'react-native';
 import {
   SafeAreaProvider,
-  useSafeAreaInsets,
+  SafeAreaView,
 } from 'react-native-safe-area-context';
+import AddEvent from './components/AddEvent/AddEvent';
+import Event from './components/Event/Event';
+import { EventEntry } from './data/types/events';
+import { mockEvents } from './data/mocks/events';
+
 
 function App() {
-  const isDarkMode = useColorScheme() === 'dark';
+  const [events, setEvents] = useState<EventEntry[]>([]);
+
+  useEffect(() => {
+    setEvents(mockEvents);
+    console.log('component rendered');
+  }, []);
+
+  useEffect(() => {
+    console.log('events updated');
+  }, [events]);
 
   return (
     <SafeAreaProvider>
-      <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
-      <AppContent />
+      <SafeAreaView style={{ flex: 1, padding: 16 }}>
+        <Text style={{ fontSize: 24, fontWeight: 'bold' }}>Events</Text>
+        {events.map((event, index) => (
+          <Event key={index} category={event.category} date={event.date} description={event.description} />
+        ))}
+        <AddEvent />
+      </SafeAreaView>
     </SafeAreaProvider>
   );
 }
-
-function AppContent() {
-  const safeAreaInsets = useSafeAreaInsets();
-
-  return (
-    <View style={styles.container}>
-      <NewAppScreen
-        templateFileName="App.tsx"
-        safeAreaInsets={safeAreaInsets}
-      />
-    </View>
-  );
-}
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-});
 
 export default App;
