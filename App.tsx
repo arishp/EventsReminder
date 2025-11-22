@@ -26,7 +26,7 @@ function App() {
   }, []);
 
   useEffect(() => {
-    console.log('events updated');
+    console.log('events updated', events);
   }, [events]);
 
   return (
@@ -36,7 +36,7 @@ function App() {
         {events.map((event, index) => (
           <Event key={index} category={event.category} date={event.date} description={event.description} />
         ))}
-        <AddEvent />
+        <AddEvent setEvents={setEvents} />
       </SafeAreaView>
     </SafeAreaProvider>
   );
