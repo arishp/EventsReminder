@@ -1,12 +1,13 @@
 import { useState, Dispatch, SetStateAction } from 'react';
-import { View, Text, TextInput, Button } from 'react-native';
+import { View, Text, TextInput, Button, StyleProp, ViewStyle } from 'react-native';
 import { EventEntry } from '../../data/types/events';
 
 interface AddEventProps {
     setEvents: Dispatch<SetStateAction<EventEntry[]>>;
+    style?: StyleProp<ViewStyle>;
 }
 
-const AddEvent = ({ setEvents }: AddEventProps) => {
+const AddEvent = ({ setEvents, style }: AddEventProps) => {
     const [category, setCategory] = useState('');
     const [date, setDate] = useState('');
     const [description, setDescription] = useState('');
@@ -26,7 +27,7 @@ const AddEvent = ({ setEvents }: AddEventProps) => {
     }
 
     return (
-        <View style={{ flexDirection: 'row' }}>
+        <View style={[{ flexDirection: 'row' }, style]}>
             <TextInput
                 placeholder="Category"
                 style={{ borderWidth: 1, borderColor: 'black', margin: 5 }}

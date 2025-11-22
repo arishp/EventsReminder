@@ -6,7 +6,7 @@
  */
 
 import { useState, useEffect } from 'react';
-import { ScrollView, Text } from 'react-native';
+import { ScrollView, Text, View } from 'react-native';
 import {
   SafeAreaProvider,
   SafeAreaView,
@@ -27,13 +27,15 @@ function App() {
   return (
     <SafeAreaProvider>
       <SafeAreaView style={{ flex: 1, padding: 16 }}>
-        <Text style={{ fontSize: 24, fontWeight: 'bold' }}>Events</Text>
+        <Text style={{ fontSize: 24, fontWeight: 'bold', paddingVertical: 16 }}>Events</Text>
         <ScrollView>
           {events.map((event, index) => (
             <Event key={index} category={event.category} date={event.date} description={event.description} />
           ))}
         </ScrollView>
-        <AddEvent setEvents={setEvents} />
+        <View style={{ paddingVertical: 16, alignItems: 'center' }}>
+          <AddEvent setEvents={setEvents} />
+        </View>
       </SafeAreaView>
     </SafeAreaProvider>
   );
