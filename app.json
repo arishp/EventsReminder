@@ -1,4 +1,7 @@
 {
   "name": "EventsReminder",
-  "displayName": "EventsReminder"
+  "displayName": "EventsReminder",
+  "plugins": [
+    "expo-sqlite"
+  ]
 }

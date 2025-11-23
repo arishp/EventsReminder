@@ -1,6 +1,7 @@
-import { Text, View } from "react-native";
+import { FlatList, Text, View } from "react-native";
 import Event from "../Event/Event";
 import { EventEntry } from "../../data/types/events";
+import styles from "./style";
 
 const EventsList = ({ events }: { events: EventEntry[] }) => {
 
@@ -9,10 +10,17 @@ const EventsList = ({ events }: { events: EventEntry[] }) => {
     }
 
     return (
-        <View>
-            {events.map((eventItem, index) => (
-                <Event key={index} category={eventItem.category} date={eventItem.date} description={eventItem.description} />
-            ))}
+        <View style={styles.eventListContainer}>
+            <FlatList
+                data={events}
+                renderItem={({ item }) => (
+                    <Event
+                        key={item.id}
+                        id={item.id}
+                        category={item.category}
+                        date={item.date}
+                        description={item.description} />
+                )} />
         </View>
     );
 }
