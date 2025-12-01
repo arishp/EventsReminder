@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { View, Text, TextInput, Pressable, ScrollView } from 'react-native';
 
 import { eventItem } from "../../models/EventItemModel";
@@ -27,6 +27,25 @@ const mockData: eventItem[] = [
 ];
 
 const Home = () => {
+
+    const [events, setEvents] = React.useState<eventItem[]>([]);
+
+    const [date, setDate] = React.useState<string>("");
+    const [description, setDescription] = React.useState<string>("");
+    const [category, setCategory] = React.useState<string>("");
+
+    useEffect(() => {
+        setEvents(mockData);
+    }, []);
+
+    const handleAddEvent = (eventItem: eventItem) => {
+        setEvents([...events, eventItem]);
+    }
+
+    const handleDeleteEvent = (id: number) => {
+        setEvents(events.filter(event => event.id !== id));
+    }
+
     return (
         <View style={styles.container}>
             <View style={styles.headerContainer}>
@@ -34,12 +53,12 @@ const Home = () => {
             </View>
 
             <ScrollView style={styles.eventsContainer}>
-                {mockData.map((item, index) => (
+                {events.map((item, index) => (
                     <View key={index} style={styles.eventItem}>
                         <Text style={styles.eventDate}>{item.date}</Text>
                         <Text style={styles.eventDescription}>{item.description}</Text>
                         <Text style={styles.eventCategory}>{item.category}</Text>
-                        <Pressable>
+                        <Pressable onPress={() => handleDeleteEvent(item.id)}>
                             <Text>Delete</Text>
                         </Pressable>
                     </View>
@@ -47,10 +66,15 @@ const Home = () => {
             </ScrollView>
 
             <View style={styles.addEventContainer}>
-                <TextInput placeholder="Date" />
-                <TextInput placeholder="Event Description" />
-                <TextInput placeholder="Category" />
-                <Pressable>
+                <TextInput placeholder="Date" onChangeText={setDate} />
+                <TextInput placeholder="Event Description" onChangeText={setDescription} />
+                <TextInput placeholder="Category" onChangeText={setCategory} />
+                <Pressable onPress={() => handleAddEvent({
+                    id: Date.now(),
+                    date: date,
+                    description: description,
+                    category: category
+                })}>
                     <Text>Add Event</Text>
                 </Pressable>
             </View>
