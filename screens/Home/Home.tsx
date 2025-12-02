@@ -1,5 +1,7 @@
-import React, { useEffect } from "react";
+import React, { useEffect,useCallback } from "react";
 import { View, Text, TextInput, Pressable, ScrollView } from 'react-native';
+
+import { getDBConnection, createTable, getEventItems, saveEventItems, deleteEventItem } from "../../services/db-service";
 
 import { eventItem } from "../../models/EventItemModel";
 
@@ -26,25 +28,82 @@ const mockData: eventItem[] = [
     }
 ];
 
+const mockData2: eventItem[] = [
+    {
+        id: 1,
+        date: "2022-11-16",
+        description: "Paari",
+        category: "Birthday"
+    }
+];
+
 const Home = () => {
 
     const [events, setEvents] = React.useState<eventItem[]>([]);
+
+    // load data from db
+    const loadDataCallback = useCallback(async () => {
+        try {
+        const initEvents = mockData2;
+        const db = await getDBConnection();
+        await createTable(db);
+        const storedEventItems = await getEventItems(db);
+        if (storedEventItems.length) {
+            setEvents(storedEventItems);
+        } else {
+            await saveEventItems(db, initEvents);
+            setEvents(initEvents);
+        }
+        } catch (error) {
+        console.error(error);
+        }
+    }, []);
+
+    useEffect(() => {
+        loadDataCallback();
+    }, [loadDataCallback]);
 
     const [date, setDate] = React.useState<string>("");
     const [description, setDescription] = React.useState<string>("");
     const [category, setCategory] = React.useState<string>("");
 
-    useEffect(() => {
-        setEvents(mockData);
-    }, []);
+    const handleAddEvent = async (eventItem: eventItem) => {
+        if (!eventItem.date.trim() || !eventItem.description.trim() || !eventItem.category.trim()) return;
+        try {
+            const newEventItem = eventItem;
+            setEvents([...events, newEventItem]);
+            const db = await getDBConnection();
+            await saveEventItems(db, [newEventItem]);
+            setDate("");
+            setDescription("");
+            setCategory("");
+        } catch (error) {
+            console.error(error);
+        }
+    };
 
-    const handleAddEvent = (eventItem: eventItem) => {
-        setEvents([...events, eventItem]);
-    }
+    // delete item
+    const handleDeleteEvent = async (id: number) => {
+        try {
+            const db = await getDBConnection();
+            await deleteEventItem(db, id);
+            setEvents(prevEvents => prevEvents.filter(event => event.id !== id));
+        } catch (error) {
+            console.error(error);
+        }
+    };
 
-    const handleDeleteEvent = (id: number) => {
-        setEvents(events.filter(event => event.id !== id));
-    }
+    // useEffect(() => {
+    //     setEvents(mockData);
+    // }, []);
+
+    // const handleAddEvent = (eventItem: eventItem) => {
+    //     setEvents([...events, eventItem]);
+    // }
+
+    // const handleDeleteEvent = (id: number) => {
+    //     setEvents(events.filter(event => event.id !== id));
+    // }
 
     return (
         <View style={styles.container}>
