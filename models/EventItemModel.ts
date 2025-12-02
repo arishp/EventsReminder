@@ -1,6 +1,6 @@
 export type eventItem = {
   id: number;
-  date: string;
+  date: Date;
   description: string;
   category: string;
 };

@@ -15,7 +15,7 @@ export const createTable = async (db: SQLiteDatabase) => {
   // create table if not exists
   const query = `CREATE TABLE IF NOT EXISTS ${tableName}(
         id INTEGER PRIMARY KEY NOT NULL,
-        date TEXT NOT NULL,
+        date DATE NOT NULL,
         description TEXT NOT NULL,
         category TEXT NOT NULL
     );`;

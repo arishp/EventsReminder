@@ -9,6 +9,8 @@ const styles = StyleSheet.create({
     headerContainer: {
         marginTop: 10,
         marginBottom: 10,
+        paddingBottom: 10,
+
     },
     headerText: {
         fontSize: 20,
@@ -25,15 +27,23 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-between',
         marginVertical: 10,
+        borderWidth: 1,
+        borderColor: 'gray',
+        borderRadius: 6,
+        padding: 6,
     },
     eventDate: {
-        fontSize: 14,
+        fontSize: 12,
     },
     eventDescription: {
-        fontSize: 14,
+        fontSize: 12,
     },
     eventCategory: {
-        fontSize: 14,
+        fontSize: 12,
+    },
+    deletButtonTxt:{
+        fontSize: 12,
+        color: '#151E26',
     },
     addEventContainer: {
         marginTop: 10,
@@ -42,7 +52,79 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
         alignItems: 'center',
     },
-
+    calendarContainer: {
+      width: 75,
+      height: 30,
+      borderWidth: 1,
+      borderColor: 'gray',
+      borderRadius: 6,
+      flexDirection: 'row',
+      justifyContent: 'center',
+      alignItems: 'center',
+      paddingHorizontal: 6,
+    },
+    calendarButtonTxt:{
+      fontSize: 12,
+      color: '#151E26',
+    },
+    eventDescriptionInputContainer: {
+      borderWidth: 1,
+      borderColor: 'gray',
+      borderRadius: 6,
+      paddingHorizontal: 6,
+      width: 120,
+      height: 30,
+      flexDirection: 'row',
+      alignItems: 'center',
+    },
+    eventDescriptionInput: {
+      fontSize: 12,
+      padding:0,
+    },
+    dropdownButtonStyle: {
+      width: 90,
+      height: 30,
+      borderWidth: 1,
+      borderColor: 'gray',
+      borderRadius: 6,
+      flexDirection: 'row',
+      justifyContent: 'center',
+      alignItems: 'center',
+      paddingHorizontal: 6,
+    },
+    dropdownButtonTxtStyle: {
+      flex: 1,
+      fontSize: 12,
+      color: '#151E26',
+    },
+    dropdownItemStyle: {
+      width: '100%',
+      flexDirection: 'row',
+      paddingHorizontal: 12,
+      justifyContent: 'center',
+      alignItems: 'center',
+      paddingVertical: 8,
+    },
+    dropdownItemTxtStyle: {
+      flex: 1,
+      fontSize: 12,
+      color: '#151E26',
+    },
+    addEventButton: {
+      width: 75,
+      height: 30,
+      borderWidth: 1,
+      borderColor: 'gray',
+      borderRadius: 6,
+      flexDirection: 'row',
+      justifyContent: 'center',
+      alignItems: 'center',
+      paddingHorizontal: 6,
+    },
+    addEventButtonTxt: {
+      fontSize: 12,
+      color: '#151E26',
+    },
 });
 
 export default styles;
