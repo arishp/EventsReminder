@@ -160,7 +160,7 @@ const Home = () => {
 
                 <View style={styles.calendarContainer}>
                     <Pressable onPress={() => setCalendarOpen(true)}>
-                        <Text style={styles.calendarButtonTxt}>Calendar</Text>
+                        <Text style={styles.calendarButtonTxt}>{date.toString().slice(4, 15)}</Text>
                     </Pressable>
                 </View>
                 <DatePicker

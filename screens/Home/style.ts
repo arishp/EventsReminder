@@ -53,7 +53,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     calendarContainer: {
-      width: 75,
+      width: 85,
       height: 30,
       borderWidth: 1,
       borderColor: 'gray',
