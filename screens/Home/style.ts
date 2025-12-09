@@ -3,14 +3,14 @@ import { StyleSheet } from 'react-native';
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        marginTop: 20,
-        marginHorizontal: 20,
+        paddingVertical: 50,
+        paddingHorizontal: 20,
+        backgroundColor: 'white',
     },
     headerContainer: {
         marginTop: 10,
         marginBottom: 10,
         paddingBottom: 10,
-
     },
     headerText: {
         fontSize: 20,

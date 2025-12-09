@@ -99,24 +99,12 @@ const Home = () => {
         }
     };
 
-    // useEffect(() => {
-    //     setEvents(mockData);
-    // }, []);
-
-    // const handleAddEvent = (eventItem: eventItem) => {
-    //     setEvents([...events, eventItem]);
-    // }
-
-    // const handleDeleteEvent = (id: number) => {
-    //     setEvents(events.filter(event => event.id !== id));
-    // }
-
     const [calendarOpen, setCalendarOpen] = useState<boolean>(false);
 
     return (
         <View style={styles.container}>
             <View style={styles.headerContainer}>
-                <Text style={styles.headerText}>App Title</Text>
+                <Text style={styles.headerText}>Events</Text>
             </View>
 
 
