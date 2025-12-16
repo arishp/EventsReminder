@@ -86,6 +86,23 @@ const Home = () => {
         return true;
     });
 
+    const sortedEvents = filteredEvents.sort((a, b) => {
+        const dateA = new Date(a.date);
+        const dateB = new Date(b.date);
+
+        const monthA = dateA.getMonth();
+        const monthB = dateB.getMonth();
+
+        if (monthA !== monthB) {
+            return monthA - monthB;
+        }
+
+        const dayA = dateA.getDate();
+        const dayB = dateB.getDate();
+
+        return dayA - dayB;
+    });
+
     const handleAddEvent = async (eventItem: eventItem) => {
         if (!eventItem.description.trim() || !eventItem.category.trim()) return;
         try {
@@ -145,7 +162,7 @@ const Home = () => {
             />
 
             <ScrollView style={styles.eventsContainer}>
-                {filteredEvents.map((item, index) => (
+                {sortedEvents.map((item, index) => (
                     <View key={index} style={styles.eventItem}>
                         <Text style={styles.eventDate}>{item.date.toString().slice(4, 10)}</Text>
                         <Text style={styles.eventDescription}>{item.description}</Text>
