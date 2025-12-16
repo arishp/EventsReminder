@@ -62,7 +62,7 @@ const Home = () => {
     const [category, setCategory] = useState<string>("");
     const categories = ["Birthday", "Wedding", "Recurring", "Memorial", "Others"];
     const [filter, setFilter] = useState<string>("");
-    const filters = ["All", "7 days", "30 days"];
+    const filters = ["All", "Next 7 days", "Next 30 days"];
 
     const handleFilterEvent = (selectedFilter: string) => {
         setFilter(selectedFilter);
@@ -73,14 +73,20 @@ const Home = () => {
         const eventDate = new Date(event.date);
         const today = new Date();
         today.setHours(0, 0, 0, 0);
+        eventDate.setFullYear(today.getFullYear());
         eventDate.setHours(0, 0, 0, 0);
 
+        if (eventDate.getTime() < today.getTime()) {
+            eventDate.setFullYear(today.getFullYear() + 1);
+        }
+
         const diffTime = eventDate.getTime() - today.getTime();
+
         const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
 
-        if (filter === "7 days") {
+        if (filter === "Next 7 days") {
             return diffDays >= 0 && diffDays <= 7;
-        } else if (filter === "30 days") {
+        } else if (filter === "Next 30 days") {
             return diffDays >= 0 && diffDays <= 30;
         }
         return true;
@@ -118,6 +124,10 @@ const Home = () => {
         }
     };
 
+    const handleEditEvent = async (id: number) => {
+        console.log("Edit event on item id: ", id);
+    };
+
     // delete item
     const handleDeleteEvent = async (id: number) => {
         try {
@@ -133,11 +143,13 @@ const Home = () => {
 
     return (
         <View style={styles.container}>
+
+            {/* Header text */}
             <View style={styles.headerContainer}>
                 <Text style={styles.headerText}>Events</Text>
             </View>
 
-
+            {/* Filter Dropdown*/}
             <SelectDropdown
                 data={filters}
                 onSelect={(selectedItem, index) => {
@@ -161,12 +173,16 @@ const Home = () => {
                 }}
             />
 
+            {/* Events */}
             <ScrollView style={styles.eventsContainer}>
                 {sortedEvents.map((item, index) => (
                     <View key={index} style={styles.eventItem}>
                         <Text style={styles.eventDate}>{item.date.toString().slice(4, 10)}</Text>
                         <Text style={styles.eventDescription}>{item.description}</Text>
                         <Text style={styles.eventCategory}>{item.category}</Text>
+                        <Pressable onPress={() => handleEditEvent(item.id)}>
+                            <Text style={styles.deletButtonTxt}>Edit</Text>
+                        </Pressable>
                         <Pressable onPress={() => handleDeleteEvent(item.id)}>
                             <Text style={styles.deletButtonTxt}>Delete</Text>
                         </Pressable>
