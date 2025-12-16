@@ -30,15 +30,6 @@ const mockData: eventItem[] = [
     }
 ];
 
-const mockData2: eventItem[] = [
-    {
-        id: 1,
-        date: new Date("2022-11-16"),
-        description: "Paari",
-        category: "Birthday"
-    }
-];
-
 const Home = () => {
 
     const [events, setEvents] = useState<eventItem[]>([]);
@@ -71,7 +62,29 @@ const Home = () => {
     const [category, setCategory] = useState<string>("");
     const categories = ["Birthday", "Wedding", "Recurring", "Memorial", "Others"];
     const [filter, setFilter] = useState<string>("");
-    const filters = ["All", "This Week", "This Month"];
+    const filters = ["All", "7 days", "30 days"];
+
+    const handleFilterEvent = (selectedFilter: string) => {
+        setFilter(selectedFilter);
+    };
+
+    const filteredEvents = events.filter(event => {
+        if (filter === "All" || filter === "") return true;
+        const eventDate = new Date(event.date);
+        const today = new Date();
+        today.setHours(0, 0, 0, 0);
+        eventDate.setHours(0, 0, 0, 0);
+
+        const diffTime = eventDate.getTime() - today.getTime();
+        const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+
+        if (filter === "7 days") {
+            return diffDays >= 0 && diffDays <= 7;
+        } else if (filter === "30 days") {
+            return diffDays >= 0 && diffDays <= 30;
+        }
+        return true;
+    });
 
     const handleAddEvent = async (eventItem: eventItem) => {
         if (!eventItem.description.trim() || !eventItem.category.trim()) return;
@@ -111,7 +124,7 @@ const Home = () => {
             <SelectDropdown
                 data={filters}
                 onSelect={(selectedItem, index) => {
-                    setFilter(selectedItem)
+                    handleFilterEvent(selectedItem);
                 }}
                 renderButton={(selectedItem) => {
                     return (
@@ -132,7 +145,7 @@ const Home = () => {
             />
 
             <ScrollView style={styles.eventsContainer}>
-                {events.map((item, index) => (
+                {filteredEvents.map((item, index) => (
                     <View key={index} style={styles.eventItem}>
                         <Text style={styles.eventDate}>{item.date.toString().slice(4, 10)}</Text>
                         <Text style={styles.eventDescription}>{item.description}</Text>
