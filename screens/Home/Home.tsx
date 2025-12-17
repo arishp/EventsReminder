@@ -9,6 +9,9 @@ import { eventItem } from "../../models/EventItemModel";
 
 import styles from "./style";
 
+import Header from "../../components/Header";
+import EventsList from "../../components/EventsList";
+
 const mockData: eventItem[] = [
     {
         id: 1,
@@ -144,51 +147,8 @@ const Home = () => {
     return (
         <View style={styles.container}>
 
-            {/* Header text */}
-            <View style={styles.headerContainer}>
-                <Text style={styles.headerText}>Events</Text>
-            </View>
-
-            {/* Filter Dropdown*/}
-            <SelectDropdown
-                data={filters}
-                onSelect={(selectedItem, index) => {
-                    handleFilterEvent(selectedItem);
-                }}
-                renderButton={(selectedItem) => {
-                    return (
-                        <View style={styles.dropdownButtonStyle}>
-                            <Text style={styles.dropdownButtonTxtStyle}>
-                                {(selectedItem && selectedItem) || 'Filter'}
-                            </Text>
-                        </View>
-                    );
-                }}
-                renderItem={(item, index, isSelected) => {
-                    return (
-                        <View style={{ ...styles.dropdownItemStyle, ...(isSelected && { backgroundColor: '#D2D9DF' }) }}>
-                            <Text style={styles.dropdownItemTxtStyle}>{item}</Text>
-                        </View>
-                    );
-                }}
-            />
-
-            {/* Events */}
-            <ScrollView style={styles.eventsContainer}>
-                {sortedEvents.map((item, index) => (
-                    <View key={index} style={styles.eventItem}>
-                        <Text style={styles.eventDate}>{item.date.toString().slice(4, 10)}</Text>
-                        <Text style={styles.eventDescription}>{item.description}</Text>
-                        <Text style={styles.eventCategory}>{item.category}</Text>
-                        <Pressable onPress={() => handleEditEvent(item.id)}>
-                            <Text style={styles.deletButtonTxt}>Edit</Text>
-                        </Pressable>
-                        <Pressable onPress={() => handleDeleteEvent(item.id)}>
-                            <Text style={styles.deletButtonTxt}>Delete</Text>
-                        </Pressable>
-                    </View>
-                ))}
-            </ScrollView>
+            <Header filters={filters} handleFilterEvent={handleFilterEvent} />
+            <EventsList sortedEvents={sortedEvents} handleEditEvent={handleEditEvent} handleDeleteEvent={handleDeleteEvent} />
 
             <View style={styles.addEventContainer}>
 
