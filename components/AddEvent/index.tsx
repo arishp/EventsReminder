@@ -1,38 +1,52 @@
-import { ScrollView, View, Pressable, Text } from "react-native";
+import { ScrollView, View, Pressable, Text, TextInput } from "react-native";
+import DatePicker from 'react-native-date-picker';
+import SelectDropdown from 'react-native-select-dropdown'
 
 import styles from "./style";
 
+interface AddEventProps {
+    calendarOpen: boolean;
+    setCalendarOpen: (open: boolean) => void;
+    date: Date;
+    setDate: (date: Date) => void;
+    description: string;
+    setDescription: (description: string) => void;
+    category: string;
+    setCategory: (category: string) => void;
+    handleAddEvent: (event: Event) => void;
+    categories: string[];
+}
 
-const AddEvent = () => {
+const AddEvent = (props: AddEventProps) => {
     return (
         <View style={styles.addEventContainer}>
 
-            {/* <View style={styles.calendarContainer}>
-                <Pressable onPress={() => setCalendarOpen(true)}>
-                    <Text style={styles.calendarButtonTxt}>{date.toString().slice(4, 15)}</Text>
+            <View style={styles.calendarContainer}>
+                <Pressable onPress={() => props.setCalendarOpen(true)}>
+                    <Text style={styles.calendarButtonTxt}>{props.date.toString().slice(4, 15)}</Text>
                 </Pressable>
             </View>
             <DatePicker
                 modal
-                open={calendarOpen}
-                date={date}
+                open={props.calendarOpen}
+                date={props.date}
                 onConfirm={(date) => {
-                    setCalendarOpen(false)
-                    setDate(date)
+                    props.setCalendarOpen(false)
+                    props.setDate(date)
                 }}
                 onCancel={() => {
-                    setCalendarOpen(false)
+                    props.setCalendarOpen(false)
                 }}
                 mode="date" />
 
             <View style={styles.eventDescriptionInputContainer}>
-                <TextInput style={styles.eventDescriptionInput} placeholder="Description" value={description} onChangeText={setDescription} />
+                <TextInput style={styles.eventDescriptionInput} placeholder="Description" value={props.description} onChangeText={props.setDescription} />
             </View>
 
             <SelectDropdown
-                data={categories}
+                data={props.categories}
                 onSelect={(selectedItem, index) => {
-                    setCategory(selectedItem)
+                    props.setCategory(selectedItem)
                 }}
                 renderButton={(selectedItem) => {
                     return (
@@ -53,15 +67,15 @@ const AddEvent = () => {
             />
 
             <View style={styles.addEventButton}>
-                <Pressable onPress={() => handleAddEvent({
+                <Pressable onPress={() => props.handleAddEvent({
                     id: Date.now(),
-                    date: date,
-                    description: description,
-                    category: category
+                    date: props.date,
+                    description: props.description,
+                    category: props.category
                 })}>
                     <Text style={styles.addEventButtonTxt}>Add Event</Text>
                 </Pressable>
-            </View> */}
+            </View>
 
         </View>
     );
