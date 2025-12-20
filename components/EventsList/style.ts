@@ -15,9 +15,10 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         borderColor: '#cdcdcdff',
         borderRadius: 12,
-        padding: 12,
+        padding: 8,
         marginBottom: 12,
         backgroundColor: 'white',
+        elevation: 3,
     },
     eventDateContainer: {
         flexDirection: 'column',
