@@ -1,4 +1,4 @@
-export type eventItem = {
+export type eventItemType = {
   id: number;
   date: Date;
   description: string;

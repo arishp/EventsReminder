@@ -4,7 +4,8 @@ import AddEvent from "../../components/AddEvent";
 
 import { getDBConnection, createTable, getEventItems, saveEventItems, deleteEventItem } from "../../services/db-service";
 
-import { eventItem } from "../../models/EventItemModel";
+import { eventItemType } from '../../types/EventItemType'
+import { mockEventsData } from '../../mockData/MockEventsData'
 
 import styles from "./style";
 
@@ -12,35 +13,14 @@ import Header from "../../components/Header";
 import EventsList from "../../components/EventsList";
 import Divider from "../../components/Divider";
 
-const mockData: eventItem[] = [
-    {
-        id: 1,
-        date: new Date("2025-12-01"),
-        description: "Event 1",
-        category: "Category 1"
-    },
-    {
-        id: 2,
-        date: new Date("2025-12-02"),
-        description: "Event 2",
-        category: "Category 2"
-    },
-    {
-        id: 3,
-        date: new Date("2025-12-03"),
-        description: "Event 3",
-        category: "Category 3"
-    }
-];
-
 const Home = () => {
 
-    const [events, setEvents] = useState<eventItem[]>([]);
+    const [events, setEvents] = useState<eventItemType[]>([]);
 
     // load data from db
     const loadDataCallback = useCallback(async () => {
         try {
-            const initEvents = mockData;
+            const initEvents = mockEventsData;
             const db = await getDBConnection();
             await createTable(db);
             const storedEventItems = await getEventItems(db);
@@ -63,7 +43,7 @@ const Home = () => {
     const [date, setDate] = useState<Date>(new Date());
     const [description, setDescription] = useState<string>("");
     const [category, setCategory] = useState<string>("");
-    const categories = ["Birthday", "Wedding", "Recurring", "Memorial", "Others"];
+    const categories = ["Birthday", "Wedding day", "Recurring", "Memorial", "Others"];
     const [filter, setFilter] = useState<string>("");
     const filters = ["All", "Next 7 days", "Next 30 days"];
 
@@ -112,7 +92,7 @@ const Home = () => {
         return dayA - dayB;
     });
 
-    const handleAddEvent = async (eventItem: eventItem) => {
+    const handleAddEvent = async (eventItem: eventItemType) => {
         if (!eventItem.description.trim() || !eventItem.category.trim()) return;
         try {
             const newEventItem = eventItem;
