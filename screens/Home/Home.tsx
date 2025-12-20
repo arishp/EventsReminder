@@ -10,6 +10,7 @@ import styles from "./style";
 
 import Header from "../../components/Header";
 import EventsList from "../../components/EventsList";
+import Divider from "../../components/Divider";
 
 const mockData: eventItem[] = [
     {
@@ -154,6 +155,7 @@ const Home = () => {
                 handleEditEvent={handleEditEvent}
                 handleDeleteEvent={handleDeleteEvent}
             />
+            <Divider />
             <AddEvent
                 date={date}
                 setDate={setDate}

@@ -6,7 +6,7 @@ const styles = StyleSheet.create({
         backgroundColor: 'white',
         marginTop: 12,
         marginHorizontal: 18,
-        marginBottom: 48,
+        marginBottom: 60,
         flexDirection: 'column',
         justifyContent: 'space-between',
         paddingBottom: 12,
@@ -35,7 +35,7 @@ const styles = StyleSheet.create({
     },
     calendarButtonTxt: {
         fontSize: 14,
-        color: 'gray',
+        color: '#505050ff',
     },
     eventDescriptionInputContainer: {
         width: '60%',
@@ -46,7 +46,7 @@ const styles = StyleSheet.create({
     },
     eventDescriptionInput: {
         fontSize: 14,
-        color: 'gray',
+        color: '#505050ff',
         paddingHorizontal: 6,
         paddingVertical: 6,
     },
@@ -70,7 +70,7 @@ const styles = StyleSheet.create({
     dropdownButtonTxtStyle: {
         flex: 1,
         fontSize: 14,
-        color: 'black',
+        color: '#505050ff',
     },
     dropdownItemStyle: {
         width: '100%',
@@ -79,11 +79,13 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         paddingVertical: 8,
+        borderBottomWidth: 1,
+        borderBottomColor: '#e2e2e2ff',
     },
     dropdownItemTxtStyle: {
         flex: 1,
-        fontSize: 12,
-        color: '#151E26',
+        fontSize: 14,
+        color: '#505050ff',
     },
     addEventButton: {
         width: '36%',

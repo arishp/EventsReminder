@@ -4,10 +4,8 @@ const styles = StyleSheet.create({
     sectionContainer: {
         flex: 0.7,
         backgroundColor: 'white',
-        marginTop: 12,
+        marginTop: 16,
         marginHorizontal: 18,
-        borderBottomWidth: 1,
-        borderBottomColor: 'gray',
     },
     eventItem: {
         flexDirection: 'row',
@@ -22,7 +20,7 @@ const styles = StyleSheet.create({
     },
     eventDateContainer: {
         flexDirection: 'column',
-        // width: '15%',
+        width: '15%',
         alignItems: 'center',
         backgroundColor: '#f2f2f2',
         borderRadius: 12,
@@ -62,7 +60,7 @@ const styles = StyleSheet.create({
         width: '20%',
         flexDirection: 'row',
         alignItems: 'center',
-        justifyContent: 'space-evenly',
+        justifyContent: 'space-between',
         // backgroundColor: '#f2f2f2',
         borderRadius: 12,
     },

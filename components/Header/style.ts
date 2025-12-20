@@ -9,8 +9,8 @@ const styles = StyleSheet.create({
         marginTop: 48,
         marginHorizontal: 18,
         borderBottomWidth: 1,
-        borderBottomColor: 'gray',
-        paddingVertical: 12,
+        borderBottomColor: '#e2e2e2ff',
+        paddingBottom: 18,
     },
     titleContainer: {
         flexDirection: 'row',
@@ -23,7 +23,7 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
     },
     dropdownButtonStyle: {
-        width: 120,
+        width: '40%',
         height: 36,
         borderWidth: 1,
         borderColor: 'gray',
@@ -45,11 +45,13 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         paddingVertical: 8,
+        borderBottomWidth: 1,
+        borderBottomColor: '#e2e2e2ff',
     },
     dropdownItemTxtStyle: {
         flex: 1,
-        fontSize: 12,
-        color: '#151E26',
+        fontSize: 14,
+        color: '#505050ff',
     },
 });
 
