@@ -5,7 +5,8 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     flexDirection: 'column',
-    backgroundColor: '#f2f2f2',
+    justifyContent: 'space-between',
+    backgroundColor: 'white',
     marginTop: Platform.OS === 'ios' ? 20 : 0,
   },
 });

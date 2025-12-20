@@ -1,7 +1,6 @@
 import { ScrollView, View, Pressable, Text } from "react-native";
-import Carousel from "react-native-reanimated-carousel";
 import styles from "./style";
-import { Dimensions } from "react-native";
+import { Pencil, Trash2 } from 'lucide-react-native';
 
 import { eventItem } from "../../models/EventItemModel";
 
@@ -17,47 +16,32 @@ const EventsList = (props: EventsListProps) => {
     return (
         <View style={styles.sectionContainer}>
             {/* Events */}
-            {/* <ScrollView style={styles.eventsContainer}>
+            <ScrollView>
+
                 {props.sortedEvents.map((item, index) => (
                     <View key={index} style={styles.eventItem}>
-                        <Text style={styles.eventDate}>{item.date.toString().slice(4, 10)}</Text>
-                        <Text style={styles.eventDescription}>{item.description}</Text>
-                        <Text style={styles.eventCategory}>{item.category}</Text>
-                        <Pressable onPress={() => props.handleEditEvent(item.id)}>
-                            <Text style={styles.deletButtonTxt}>Edit</Text>
-                        </Pressable>
-                        <Pressable onPress={() => props.handleDeleteEvent(item.id)}>
-                            <Text style={styles.deletButtonTxt}>Delete</Text>
-                        </Pressable>
+
+                        <View style={styles.eventDateContainer}>
+                            <Text style={styles.eventMonthText}>{item.date.toString().slice(4, 7)}</Text>
+                            <Text style={styles.eventDateText}>{item.date.toString().slice(8, 10)}</Text>
+                        </View>
+                        <View style={styles.eventDetailsContainer}>
+                            <Text style={styles.eventDescription}>{item.description}</Text>
+                            <Text style={styles.eventCategory}>{item.category}</Text>
+                        </View>
+                        <View style={styles.editDeleteContainer}>
+                            <Pressable onPress={() => props.handleEditEvent(item.id)}>
+                                <Pencil size={18} color={'gray'} />
+                            </Pressable>
+                            <Pressable onPress={() => props.handleDeleteEvent(item.id)}>
+                                <Trash2 size={18} color={'gray'} />
+                            </Pressable>
+                        </View>
+
                     </View>
                 ))}
-            </ScrollView> */}
+            </ScrollView>
 
-            <Carousel
-                loop={false}
-                pagingEnabled={false}
-                snapEnabled={false}
-                style={{ height: Dimensions.get('window').height - 500 }}
-                width={Dimensions.get('window').width}
-                height={100}
-                data={props.sortedEvents}
-                vertical={true}
-                renderItem={({ index }: { index: number }) =>
-                (
-                    <View key={index} style={styles.eventItem}>
-                        <Text style={styles.eventDate}>{props.sortedEvents[index].date.toString().slice(4, 10)}</Text>
-                        <Text style={styles.eventDescription}>{props.sortedEvents[index].description}</Text>
-                        <Text style={styles.eventCategory}>{props.sortedEvents[index].category}</Text>
-                        <Pressable onPress={() => props.handleEditEvent(props.sortedEvents[index].id)}>
-                            <Text style={styles.deletButtonTxt}>Edit</Text>
-                        </Pressable>
-                        <Pressable onPress={() => props.handleDeleteEvent(props.sortedEvents[index].id)}>
-                            <Text style={styles.deletButtonTxt}>Delete</Text>
-                        </Pressable>
-                    </View>
-                )
-                }
-            />
         </View>
     );
 };

@@ -2,7 +2,7 @@ import { StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
     sectionContainer: {
-        flex: 0.2,
+        flex: 0.15,
         flexDirection: 'column',
         justifyContent: 'space-between',
         backgroundColor: 'white',
@@ -24,7 +24,7 @@ const styles = StyleSheet.create({
     },
     dropdownButtonStyle: {
         width: 120,
-        height: 30,
+        height: 36,
         borderWidth: 1,
         borderColor: 'gray',
         borderRadius: 6,
@@ -35,8 +35,8 @@ const styles = StyleSheet.create({
     },
     dropdownButtonTxtStyle: {
         flex: 1,
-        fontSize: 12,
-        color: '#151E26',
+        fontSize: 14,
+        color: 'gray',
     },
     dropdownItemStyle: {
         width: '100%',
