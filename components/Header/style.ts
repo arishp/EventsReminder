@@ -1,13 +1,22 @@
 import { StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
+    sectionContainer: {
+        flex: 0.3,
+        backgroundColor: 'white',
+        marginTop: 48,
+        marginHorizontal: 18,
+        borderBottomWidth: 1,
+        borderBottomColor: 'gray',
+    },
     titleContainer: {
-        marginTop: 10,
-        marginBottom: 10,
-        paddingBottom: 10,
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        marginBottom: 24,
     },
     titleText: {
-        fontSize: 20,
+        fontSize: 36,
         fontWeight: 'bold',
     },
     dropdownButtonStyle: {

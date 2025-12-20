@@ -1,5 +1,5 @@
 import { Text, View } from "react-native";
-
+import { Settings } from 'lucide-react-native';
 import styles from "./style";
 import SelectDropdown from "react-native-select-dropdown";
 
@@ -10,10 +10,11 @@ interface HeaderProps {
 
 const Header = (props: HeaderProps) => {
     return (
-        <View>
+        <View style={styles.sectionContainer}>
             {/* Title Text */}
             <View style={styles.titleContainer}>
                 <Text style={styles.titleText}>Events</Text>
+                <Settings />
             </View>
 
             {/* Filter Dropdown*/}

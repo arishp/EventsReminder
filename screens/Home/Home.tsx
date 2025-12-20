@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { View, Text, TextInput, Pressable, ScrollView } from 'react-native';
-import DatePicker from 'react-native-date-picker';
-import SelectDropdown from 'react-native-select-dropdown'
+import AddEvent from "../../components/AddEvent";
 
 import { getDBConnection, createTable, getEventItems, saveEventItems, deleteEventItem } from "../../services/db-service";
 
@@ -142,76 +141,29 @@ const Home = () => {
         }
     };
 
-    const [calendarOpen, setCalendarOpen] = useState<boolean>(false);
+
 
     return (
         <View style={styles.container}>
-
-            <Header filters={filters} handleFilterEvent={handleFilterEvent} />
-            <EventsList sortedEvents={sortedEvents} handleEditEvent={handleEditEvent} handleDeleteEvent={handleDeleteEvent} />
-
-            {/* Add Event Block Starts */}
-            <View style={styles.addEventContainer}>
-
-                <View style={styles.calendarContainer}>
-                    <Pressable onPress={() => setCalendarOpen(true)}>
-                        <Text style={styles.calendarButtonTxt}>{date.toString().slice(4, 15)}</Text>
-                    </Pressable>
-                </View>
-                <DatePicker
-                    modal
-                    open={calendarOpen}
-                    date={date}
-                    onConfirm={(date) => {
-                        setCalendarOpen(false)
-                        setDate(date)
-                    }}
-                    onCancel={() => {
-                        setCalendarOpen(false)
-                    }}
-                    mode="date" />
-
-                <View style={styles.eventDescriptionInputContainer}>
-                    <TextInput style={styles.eventDescriptionInput} placeholder="Description" value={description} onChangeText={setDescription} />
-                </View>
-
-                <SelectDropdown
-                    data={categories}
-                    onSelect={(selectedItem, index) => {
-                        setCategory(selectedItem)
-                    }}
-                    renderButton={(selectedItem) => {
-                        return (
-                            <View style={styles.dropdownButtonStyle}>
-                                <Text style={styles.dropdownButtonTxtStyle}>
-                                    {(selectedItem && selectedItem) || 'Category'}
-                                </Text>
-                            </View>
-                        );
-                    }}
-                    renderItem={(item, index, isSelected) => {
-                        return (
-                            <View style={{ ...styles.dropdownItemStyle, ...(isSelected && { backgroundColor: '#D2D9DF' }) }}>
-                                <Text style={styles.dropdownItemTxtStyle}>{item}</Text>
-                            </View>
-                        );
-                    }}
-                />
-
-                <View style={styles.addEventButton}>
-                    <Pressable onPress={() => handleAddEvent({
-                        id: Date.now(),
-                        date: date,
-                        description: description,
-                        category: category
-                    })}>
-                        <Text style={styles.addEventButtonTxt}>Add Event</Text>
-                    </Pressable>
-                </View>
-
-            </View>
-            {/* Add Event Block Ends */}
-
+            <Header
+                filters={filters}
+                handleFilterEvent={handleFilterEvent}
+            />
+            <EventsList
+                sortedEvents={sortedEvents}
+                handleEditEvent={handleEditEvent}
+                handleDeleteEvent={handleDeleteEvent}
+            />
+            <AddEvent
+                date={date}
+                setDate={setDate}
+                description={description}
+                setDescription={setDescription}
+                category={category}
+                setCategory={setCategory}
+                handleAddEvent={handleAddEvent}
+                categories={categories}
+            />
         </View>
     );
 };
