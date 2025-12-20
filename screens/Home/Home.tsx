@@ -150,6 +150,7 @@ const Home = () => {
             <Header filters={filters} handleFilterEvent={handleFilterEvent} />
             <EventsList sortedEvents={sortedEvents} handleEditEvent={handleEditEvent} handleDeleteEvent={handleDeleteEvent} />
 
+            {/* Add Event Block Starts */}
             <View style={styles.addEventContainer}>
 
                 <View style={styles.calendarContainer}>
@@ -209,6 +210,8 @@ const Home = () => {
                 </View>
 
             </View>
+            {/* Add Event Block Ends */}
+
         </View>
     );
 };
