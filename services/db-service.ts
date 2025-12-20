@@ -1,5 +1,5 @@
 import { enablePromise, openDatabase, SQLiteDatabase } from 'react-native-sqlite-storage';
-import { eventItem } from '../models/EventItemModel';
+import { eventItemType } from '../types/EventItemType';
 
 const tableName = 'eventsTable';
 
@@ -24,9 +24,9 @@ export const createTable = async (db: SQLiteDatabase) => {
 };
 
 // get event items
-export const getEventItems = async (db: SQLiteDatabase): Promise<eventItem[]> => {
+export const getEventItems = async (db: SQLiteDatabase): Promise<eventItemType[]> => {
   try {
-    const eventItems: eventItem[] = [];
+    const eventItems: eventItemType[] = [];
     const results = await db.executeSql(`SELECT id, date, description, category FROM ${tableName}`);
     results.forEach(result => {
       for (let index = 0; index < result.rows.length; index++) {
@@ -41,7 +41,7 @@ export const getEventItems = async (db: SQLiteDatabase): Promise<eventItem[]> =>
 };
 
 // add or update event items
-export const saveEventItems = async (db: SQLiteDatabase, eventItems: eventItem[]) => {
+export const saveEventItems = async (db: SQLiteDatabase, eventItems: eventItemType[]) => {
   const insertQuery =
     `INSERT OR REPLACE INTO ${tableName}(id, date, description, category) values` +
     eventItems.map(i => `(${i.id}, '${i.date}', '${i.description}', '${i.category}')`).join(',');

@@ -100,8 +100,8 @@ const Home = () => {
             const db = await getDBConnection();
             await saveEventItems(db, [newEventItem]);
             setDate(new Date());
-            setDescription("");
-            setCategory("");
+            setDescription("Description");
+            setCategory("Category");
         } catch (error) {
             console.error(error);
         }
