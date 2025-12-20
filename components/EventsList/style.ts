@@ -1,12 +1,16 @@
 import { StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
-    eventsContainer: {
-        marginTop: 10,
-        borderTopColor: 'gray',
-        borderTopWidth: 1,
-        borderBottomColor: 'gray',
+    sectionContainer: {
+        flex: 0.7,
+        flexDirection: 'column',
+        justifyContent: 'space-between',
+        backgroundColor: 'white',
+        marginTop: 12,
+        marginHorizontal: 18,
         borderBottomWidth: 1,
+        borderBottomColor: 'gray',
+        paddingVertical: 12,
     },
     eventItem: {
         flexDirection: 'row',

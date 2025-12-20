@@ -15,7 +15,7 @@ const EventsList = (props: EventsListProps) => {
     console.log(props.sortedEvents);
     console.log('printed eventslist')
     return (
-        <View style={styles.eventsContainer}>
+        <View style={styles.sectionContainer}>
             {/* Events */}
             {/* <ScrollView style={styles.eventsContainer}>
                 {props.sortedEvents.map((item, index) => (

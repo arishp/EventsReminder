@@ -5,8 +5,8 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     flexDirection: 'column',
-    backgroundColor: 'gray',
-    paddingTop: Platform.OS === 'ios' ? 20 : 0,
+    backgroundColor: '#f2f2f2',
+    marginTop: Platform.OS === 'ios' ? 20 : 0,
   },
 });
 

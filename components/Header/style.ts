@@ -2,12 +2,15 @@ import { StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
     sectionContainer: {
-        flex: 0.3,
+        flex: 0.2,
+        flexDirection: 'column',
+        justifyContent: 'space-between',
         backgroundColor: 'white',
         marginTop: 48,
         marginHorizontal: 18,
         borderBottomWidth: 1,
         borderBottomColor: 'gray',
+        paddingVertical: 12,
     },
     titleContainer: {
         flexDirection: 'row',
@@ -20,7 +23,7 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
     },
     dropdownButtonStyle: {
-        width: 90,
+        width: 120,
         height: 30,
         borderWidth: 1,
         borderColor: 'gray',
