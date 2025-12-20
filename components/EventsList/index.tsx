@@ -1,6 +1,7 @@
 import { ScrollView, View, Pressable, Text } from "react-native";
 import Carousel from "react-native-reanimated-carousel";
 import styles from "./style";
+import { Dimensions } from "react-native";
 
 import { eventItem } from "../../models/EventItemModel";
 
@@ -14,7 +15,7 @@ const EventsList = (props: EventsListProps) => {
     console.log(props.sortedEvents);
     console.log('printed eventslist')
     return (
-        <View>
+        <View style={styles.eventsContainer}>
             {/* Events */}
             {/* <ScrollView style={styles.eventsContainer}>
                 {props.sortedEvents.map((item, index) => (
@@ -33,11 +34,17 @@ const EventsList = (props: EventsListProps) => {
             </ScrollView> */}
 
             <Carousel
-            width={430}
-            data={props.sortedEvents}
-            renderItem={({index}:{index: number}) => 
+                loop={false}
+                pagingEnabled={false}
+                snapEnabled={false}
+                style={{ height: Dimensions.get('window').height - 500 }}
+                width={Dimensions.get('window').width}
+                height={100}
+                data={props.sortedEvents}
+                vertical={true}
+                renderItem={({ index }: { index: number }) =>
                 (
-                                        <View key={index} style={styles.eventItem}>
+                    <View key={index} style={styles.eventItem}>
                         <Text style={styles.eventDate}>{props.sortedEvents[index].date.toString().slice(4, 10)}</Text>
                         <Text style={styles.eventDescription}>{props.sortedEvents[index].description}</Text>
                         <Text style={styles.eventCategory}>{props.sortedEvents[index].category}</Text>
@@ -49,7 +56,7 @@ const EventsList = (props: EventsListProps) => {
                         </Pressable>
                     </View>
                 )
-            }
+                }
             />
         </View>
     );
