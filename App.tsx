@@ -5,15 +5,15 @@
  * @format
  */
 import React from "react";
-import { SafeAreaProvider } from "react-native-safe-area-context";
+import { NavigationContainer } from '@react-navigation/native';
 
-import Home from "./screens/Home/Home";
+import RootStack from "./navigation";
 
 function App() {
   return (
-    <SafeAreaProvider>
-      <Home />
-    </SafeAreaProvider>
+    <NavigationContainer>
+      <RootStack />
+    </NavigationContainer>
   );
 }
 

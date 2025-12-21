@@ -17,10 +17,17 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
         alignItems: 'center',
         marginBottom: 24,
+        paddingRight: 12,
     },
     titleText: {
         fontSize: 36,
         fontWeight: 'bold',
+    },
+    filterRow: {
+        // backgroundColor:'red',
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
     },
     dropdownButtonStyle: {
         width: '40%',
@@ -52,6 +59,16 @@ const styles = StyleSheet.create({
         flex: 1,
         fontSize: 14,
         color: '#505050ff',
+    },
+    notifyContainer: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+    },
+    notifyText: {
+        fontSize: 14,
+        color: '#505050ff',
+        marginRight: 6,
     },
 });
 

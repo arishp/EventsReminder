@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useCallback } from "react";
-import { View, Text, TextInput, Pressable, ScrollView } from 'react-native';
+import { View } from 'react-native';
 import AddEvent from "../../components/AddEvent";
+import { SafeAreaProvider } from "react-native-safe-area-context";
 
 import { getDBConnection, createTable, getEventItems, saveEventItems, deleteEventItem } from "../../services/db-service";
 
@@ -122,31 +123,31 @@ const Home = () => {
         }
     };
 
-
-
     return (
-        <View style={styles.container}>
-            <Header
-                filters={filters}
-                handleFilterEvent={handleFilterEvent}
-            />
-            <EventsList
-                sortedEvents={sortedEvents}
-                handleEditEvent={handleEditEvent}
-                handleDeleteEvent={handleDeleteEvent}
-            />
-            <Divider />
-            <AddEvent
-                date={date}
-                setDate={setDate}
-                description={description}
-                setDescription={setDescription}
-                category={category}
-                setCategory={setCategory}
-                handleAddEvent={handleAddEvent}
-                categories={categories}
-            />
-        </View>
+        <SafeAreaProvider>
+            <View style={styles.container}>
+                <Header
+                    filters={filters}
+                    handleFilterEvent={handleFilterEvent}
+                />
+                <EventsList
+                    sortedEvents={sortedEvents}
+                    handleEditEvent={handleEditEvent}
+                    handleDeleteEvent={handleDeleteEvent}
+                />
+                <Divider />
+                <AddEvent
+                    date={date}
+                    setDate={setDate}
+                    description={description}
+                    setDescription={setDescription}
+                    category={category}
+                    setCategory={setCategory}
+                    handleAddEvent={handleAddEvent}
+                    categories={categories}
+                />
+            </View>
+        </SafeAreaProvider>
     );
 };
 
