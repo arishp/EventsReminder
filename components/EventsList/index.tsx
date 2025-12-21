@@ -2,10 +2,10 @@ import { ScrollView, View, Pressable, Text } from "react-native";
 import styles from "./style";
 import { Pencil, Trash2 } from 'lucide-react-native';
 
-import { eventItem } from "../../models/EventItemModel";
+import { eventItemType } from "../../types/EventItemType";
 
 interface EventsListProps {
-    sortedEvents: eventItem[];
+    sortedEvents: eventItemType[];
     handleEditEvent: (id: number) => void;
     handleDeleteEvent: (id: number) => void;
 }

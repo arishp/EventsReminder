@@ -3,7 +3,7 @@ import { View, Text, TextInput, Pressable } from 'react-native';
 import DatePicker from 'react-native-date-picker';
 import SelectDropdown from 'react-native-select-dropdown';
 import styles from './style';
-import { eventItem } from '../../models/EventItemModel';
+import { eventItemType } from '../../types/EventItemType';
 
 interface AddEventProps {
     date: Date;
@@ -12,7 +12,7 @@ interface AddEventProps {
     setDescription: (description: string) => void;
     category: string;
     setCategory: (category: string) => void;
-    handleAddEvent: (event: eventItem) => void;
+    handleAddEvent: (event: eventItemType) => void;
     categories: string[];
 }
 
