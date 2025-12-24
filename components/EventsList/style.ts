@@ -32,11 +32,13 @@ const styles = StyleSheet.create({
         fontSize: 16,
         fontWeight: 'regular',
         color: '#505050ff',
+        textAlign: 'center',
     },
     eventDateText: {
         fontSize: 18,
         fontWeight: 'bold',
         color: '#505050ff',
+        textAlign: 'center',
     },
     eventDetailsContainer: {
         flexDirection: 'column',
@@ -63,6 +65,44 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
         // backgroundColor: '#f2f2f2',
         borderRadius: 12,
+    },
+
+
+    eventItemEdit: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        borderWidth: 1,
+        borderColor: '#cdcdcdff',
+        borderRadius: 12,
+        padding: 8,
+        marginBottom: 12,
+        backgroundColor: 'white',
+        elevation: 3,
+    },    
+    eventDateContainerEdit: {
+        flexDirection: 'row',
+        justifyContent: 'center',
+        alignItems: 'center',
+        width: '15%',
+        backgroundColor: '#f3bd67ff',
+        borderRadius: 12,
+        paddingVertical: 4,
+        paddingHorizontal: 12,
+        marginRight: 8,
+    },
+    eventDescriptionInputContainer: {
+        width: '100%',
+        borderWidth: 1,
+        borderColor: 'gray',
+        borderRadius: 6,
+        height: 36,
+    },
+    eventDescriptionInput: {
+        fontSize: 14,
+        color: '#505050ff',
+        paddingHorizontal: 6,
+        paddingVertical: 6,
     },
 });
 
