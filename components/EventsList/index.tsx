@@ -1,4 +1,4 @@
-import { ScrollView, View, Pressable, Text } from "react-native";
+import { ScrollView, View, Pressable, Text, TextInput } from "react-native";
 import styles from "./style";
 import { Pencil, Trash2, Check, X } from 'lucide-react-native';
 
@@ -30,12 +30,21 @@ const EventsList = (props: EventsListProps) => {
                             <View key={index} style={styles.eventItem}>
 
                                 <View style={styles.eventDateContainer}>
-                                    <Text style={styles.eventMonthText}>editing date: {item.date.toString().slice(4, 7)}</Text>
+                                    <Text style={styles.eventMonthText}>{item.date.toString().slice(4, 7)}</Text>
                                     <Text style={styles.eventDateText}>{item.date.toString().slice(8, 10)}</Text>
                                 </View>
                                 <View style={styles.eventDetailsContainer}>
-                                    <Text style={styles.eventDescription}>editing description: {item.description}</Text>
-                                    <Text style={styles.eventCategory}>editing category: {item.category}</Text>
+
+                                    <TextInput
+                                        placeholder="Description"
+                                        value={item.description}
+                                    />
+
+                                    <TextInput
+                                        placeholder="Category"
+                                        value={item.category}
+                                    />
+
                                 </View>
                                 <View style={styles.editDeleteContainer}>
                                     <Pressable onPress={() => props.handleEditEventSubmit(item)}>
