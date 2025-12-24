@@ -3,6 +3,7 @@ import { ScrollView, View, Pressable, Text, TextInput } from "react-native";
 import styles from "./style";
 import { Pencil, Trash2, Check, X } from 'lucide-react-native';
 import DatePicker from 'react-native-date-picker';
+import SelectDropdown from 'react-native-select-dropdown';
 
 import { eventItemType } from "../../types/EventItemType";
 
@@ -13,6 +14,7 @@ interface EventsListProps {
     handleEditEvent: (id: number) => void;
     handleEditEventSubmit: (eventItem: eventItemType) => void;
     handleEditEventCancel: () => void;
+    categories: string[];
     handleDeleteEvent: (id: number) => void;
 }
 
@@ -40,9 +42,10 @@ const EventsList = (props: EventsListProps) => {
 
                 {props.sortedEvents.map((item, index) => (
 
-                    // if edit is not clicked
+
                     (props.isEdit && item.id === props.editId) ?
                         (
+                            // if edit is clicked
                             <View key={index} style={styles.eventItemEdit}>
 
                                 <View style={styles.eventDateContainerEdit}>
@@ -51,7 +54,6 @@ const EventsList = (props: EventsListProps) => {
                                         <Text style={styles.eventDateText}>{date.toString().slice(8, 10)}</Text>
                                     </Pressable>
                                 </View>
-
                                 <DatePicker
                                     modal
                                     open={calendarOpen}
@@ -76,10 +78,28 @@ const EventsList = (props: EventsListProps) => {
                                         />
                                     </View>
 
-                                    <TextInput
-                                        placeholder="Category"
-                                        value={category}
-                                        onChangeText={setCategory}
+                                    <SelectDropdown
+                                        data={props.categories}
+                                        defaultValue={item.category}
+                                        onSelect={(selectedItem, index) => {
+                                            setCategory(selectedItem)
+                                        }}
+                                        renderButton={(selectedItem) => {
+                                            return (
+                                                <View style={styles.dropdownButtonStyle}>
+                                                    <Text style={styles.dropdownButtonTxtStyle}>
+                                                        {(selectedItem && selectedItem) || 'Category'}
+                                                    </Text>
+                                                </View>
+                                            );
+                                        }}
+                                        renderItem={(item, index, isSelected) => {
+                                            return (
+                                                <View style={{ ...styles.dropdownItemStyle, ...(isSelected && { backgroundColor: '#D2D9DF' }) }}>
+                                                    <Text style={styles.dropdownItemTxtStyle}>{item}</Text>
+                                                </View>
+                                            );
+                                        }}
                                     />
 
                                 </View>
@@ -94,7 +114,7 @@ const EventsList = (props: EventsListProps) => {
 
                             </View>
                         ) : (
-
+                            // if edit is not clicked
                             <View key={index} style={styles.eventItem}>
 
                                 <View style={styles.eventDateContainer}>

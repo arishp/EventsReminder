@@ -97,6 +97,7 @@ const styles = StyleSheet.create({
         borderColor: 'gray',
         borderRadius: 6,
         height: 36,
+        marginBottom: 6,
     },
     eventDescriptionInput: {
         fontSize: 14,
@@ -104,6 +105,42 @@ const styles = StyleSheet.create({
         paddingHorizontal: 6,
         paddingVertical: 6,
     },
+
+
+    dropdownButtonStyle: {
+        width: '60%',
+        // width: 90,
+        height: 30,
+        borderWidth: 1,
+        borderColor: 'gray',
+        borderRadius: 6,
+        flexDirection: 'row',
+        justifyContent: 'center',
+        alignItems: 'center',
+        paddingHorizontal: 6,
+    },
+    dropdownButtonTxtStyle: {
+        flex: 1,
+        fontSize: 12,
+        color: '#505050ff',
+    },
+    dropdownItemStyle: {
+        width: '100%',
+        flexDirection: 'row',
+        paddingHorizontal: 12,
+        justifyContent: 'center',
+        alignItems: 'center',
+        paddingVertical: 8,
+        borderBottomWidth: 1,
+        borderBottomColor: '#e2e2e2ff',
+    },
+    dropdownItemTxtStyle: {
+        flex: 1,
+        fontSize: 12,
+        color: '#505050ff',
+    },
+
+
 });
 
 export default styles;

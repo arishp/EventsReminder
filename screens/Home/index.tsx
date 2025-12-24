@@ -157,6 +157,7 @@ const Home = () => {
                     handleEditEvent={handleEditEvent}
                     handleEditEventSubmit={handleEditEventSubmit}
                     handleEditEventCancel={handleEditEventCancel}
+                    categories={categories}
                     handleDeleteEvent={handleDeleteEvent}
                 />
                 <Divider />
