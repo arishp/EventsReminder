@@ -47,6 +47,8 @@ const Home = () => {
     const categories = ["Birthday", "Wedding day", "Recurring", "Memorial", "Others"];
     const [filter, setFilter] = useState<string>("");
     const filters = ["All", "Next 7 days", "Next 30 days"];
+    const [isEdit, setIsEdit] = useState<boolean>(false);
+    const [editId, setEditId] = useState<number>(0);
 
     const handleFilterEvent = (selectedFilter: string) => {
         setFilter(selectedFilter);
@@ -109,8 +111,26 @@ const Home = () => {
     };
 
     const handleEditEvent = async (id: number) => {
-        console.log("Edit event on item id: ", id);
+        setIsEdit(true);
+        setEditId(id);
     };
+
+    const handleEditEventSubmit = async (eventItem: eventItemType) => {
+        try {
+            const db = await getDBConnection();
+            await saveEventItems(db, [eventItem]);
+            setEvents(prevEvents => prevEvents.map(event => event.id === eventItem.id ? eventItem : event));
+            setIsEdit(false);
+            setEditId(0);
+        } catch (error) {
+            console.error(error);
+        }
+    }
+
+    const handleEditEventCancel = () => {
+        setIsEdit(false);
+        setEditId(0);
+    }
 
     // delete item
     const handleDeleteEvent = async (id: number) => {
@@ -132,7 +152,11 @@ const Home = () => {
                 />
                 <EventsList
                     sortedEvents={sortedEvents}
+                    isEdit={isEdit}
+                    editId={editId}
                     handleEditEvent={handleEditEvent}
+                    handleEditEventSubmit={handleEditEventSubmit}
+                    handleEditEventCancel={handleEditEventCancel}
                     handleDeleteEvent={handleDeleteEvent}
                 />
                 <Divider />
