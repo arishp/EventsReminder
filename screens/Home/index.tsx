@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from "react";
-import { View } from 'react-native';
+import { View, Pressable } from 'react-native';
 import AddEvent from "../../components/AddEvent";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 
@@ -43,15 +43,38 @@ const Home = () => {
     // const [date, setDate] = React.useState<string>("");
     const [date, setDate] = useState<Date>(new Date());
     const [description, setDescription] = useState<string>("");
-    const [category, setCategory] = useState<string>("");
     const categories = ["Birthday", "Wedding day", "Recurring", "Memorial", "Others"];
-    const [filter, setFilter] = useState<string>("");
+    const [category, setCategory] = useState<string>(categories[0]);
     const filters = ["All", "Next 7 days", "Next 30 days"];
+    const [filter, setFilter] = useState<string>(filters[0]);
     const [isEdit, setIsEdit] = useState<boolean>(false);
     const [editId, setEditId] = useState<number>(0);
 
+    const handleDateChange = (newDate: Date) => {
+        setDate(newDate);
+        setIsEdit(false);
+        setEditId(0);
+    };
+
+    const handleDescriptionChange = (text: string) => {
+        setDescription(text);
+        setIsEdit(false);
+        setEditId(0);
+    };
+
+    const handleCategoryChange = (newCategory: string) => {
+        setCategory(newCategory);
+        setIsEdit(false);
+        setEditId(0);
+    };
+
     const handleFilterEvent = (selectedFilter: string) => {
+        setDate(new Date());
+        setDescription("");
+        setCategory(categories[0]);
         setFilter(selectedFilter);
+        setIsEdit(false);
+        setEditId(0);
     };
 
     const filteredEvents = events.filter(event => {
@@ -96,7 +119,14 @@ const Home = () => {
     });
 
     const handleAddEvent = async (eventItem: eventItemType) => {
-        if (!eventItem.description.trim() || !eventItem.category.trim()) return;
+        if (!eventItem.description.trim() || !eventItem.category.trim()) {
+            setDate(new Date());
+            setDescription("");
+            setCategory(categories[0]);
+            setIsEdit(false);
+            setEditId(0);
+            return;
+        }
         try {
             const newEventItem = eventItem;
             setEvents([...events, newEventItem]);
@@ -104,13 +134,18 @@ const Home = () => {
             await saveEventItems(db, [newEventItem]);
             setDate(new Date());
             setDescription("");
-            setCategory("Category");
+            setCategory(categories[0]);
+            setIsEdit(false);
+            setEditId(0);
         } catch (error) {
             console.error(error);
         }
     };
 
     const handleEditEvent = async (id: number) => {
+        setDate(new Date());
+        setDescription("");
+        setCategory(categories[0]);
         setIsEdit(true);
         setEditId(id);
     };
@@ -134,18 +169,32 @@ const Home = () => {
 
     // delete item
     const handleDeleteEvent = async (id: number) => {
+        setDate(new Date());
+        setDescription("");
+        setCategory(categories[0]);
         try {
             const db = await getDBConnection();
             await deleteEventItem(db, id);
             setEvents(prevEvents => prevEvents.filter(event => event.id !== id));
+            setIsEdit(false);
+            setEditId(0);
         } catch (error) {
             console.error(error);
         }
     };
 
+    const handleBackgroundPress = () => {
+        setDate(new Date());
+        setDescription("");
+        setCategory(categories[0]);
+        setIsEdit(false);
+        setEditId(0);
+    };
+
     return (
         <SafeAreaProvider>
             <View style={styles.container}>
+                {/* <Pressable style={styles.container} onPress={handleBackgroundPress}> */}
                 <Header
                     filters={filters}
                     handleFilterEvent={handleFilterEvent}
@@ -163,14 +212,15 @@ const Home = () => {
                 <Divider />
                 <AddEvent
                     date={date}
-                    setDate={setDate}
+                    setDate={handleDateChange}
                     description={description}
-                    setDescription={setDescription}
+                    setDescription={handleDescriptionChange}
                     category={category}
-                    setCategory={setCategory}
+                    setCategory={handleCategoryChange}
                     handleAddEvent={handleAddEvent}
                     categories={categories}
                 />
+                {/* </Pressable> */}
             </View>
         </SafeAreaProvider>
     );

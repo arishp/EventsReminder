@@ -35,7 +35,7 @@ const Header = (props: HeaderProps) => {
                         return (
                             <View style={styles.dropdownButtonStyle}>
                                 <Text style={styles.dropdownButtonTxtStyle}>
-                                    {(selectedItem && selectedItem) || 'Filter'}
+                                    {(selectedItem && selectedItem) || props.filters[0]}
                                 </Text>
                             </View>
                         );

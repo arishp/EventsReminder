@@ -70,13 +70,13 @@ const AddEvent: React.FC<AddEventProps> = ({
                     ref={dropdownRef}
                     data={categories}
                     onSelect={(selectedItem, index) => {
-                        setCategory(selectedItem)
+                        setCategory(selectedItem);
                     }}
-                    renderButton={(selectedItem) => {
+                    renderButton={(selectedItem, isOpened) => {
                         return (
                             <View style={styles.dropdownButtonStyle}>
                                 <Text style={styles.dropdownButtonTxtStyle}>
-                                    {(selectedItem && selectedItem) || 'Category'}
+                                    {category}
                                 </Text>
                             </View>
                         );

@@ -38,7 +38,10 @@ const EventsList = (props: EventsListProps) => {
     return (
         <View style={styles.sectionContainer}>
             {/* Events */}
-            <ScrollView>
+            <ScrollView
+                showsVerticalScrollIndicator={false}
+                showsHorizontalScrollIndicator={false}
+            >
 
                 {props.sortedEvents.map((item, index) => (
 
