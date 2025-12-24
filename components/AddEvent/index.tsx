@@ -27,6 +27,7 @@ const AddEvent: React.FC<AddEventProps> = ({
     categories
 }) => {
     const [calendarOpen, setCalendarOpen] = useState<boolean>(false);
+    const dropdownRef = React.useRef<any>(null);
 
     return (
         <View style={styles.sectionContainer}>
@@ -66,6 +67,7 @@ const AddEvent: React.FC<AddEventProps> = ({
             <View style={styles.categoryButtonContainer}>
 
                 <SelectDropdown
+                    ref={dropdownRef}
                     data={categories}
                     onSelect={(selectedItem, index) => {
                         setCategory(selectedItem)
@@ -89,12 +91,15 @@ const AddEvent: React.FC<AddEventProps> = ({
                 />
 
                 <View style={styles.addEventButton}>
-                    <Pressable onPress={() => handleAddEvent({
-                        id: Date.now(),
-                        date: date,
-                        description: description,
-                        category: category
-                    })}>
+                    <Pressable onPress={() => {
+                        handleAddEvent({
+                            id: Date.now(),
+                            date: date,
+                            description: description,
+                            category: category
+                        });
+                        dropdownRef.current?.reset();
+                    }}>
                         <Text style={styles.addEventButtonTxt}> +   Add</Text>
                     </Pressable>
                 </View>
