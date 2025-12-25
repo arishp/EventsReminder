@@ -48,10 +48,10 @@ const Header = (props: HeaderProps) => {
                         );
                     }}
                 />
-                <View style={styles.notifyContainer}>
+                {/* <View style={styles.notifyContainer}>
                     <Text style={styles.notifyText}>Notify</Text>
                     <Switch />
-                </View>
+                </View> */}
             </View>
 
         </View>
